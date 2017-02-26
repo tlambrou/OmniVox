@@ -1,0 +1,45 @@
+<div class="col-md-12">
+  <div class="tuyin first">
+    <span class="title">Edit Your Post</span>
+
+    <form action='post-edit' id='edit-form'>
+      <fieldset>
+
+        <!-- Text input-->
+        <div class="form-group col-md-6">
+          <label for="title"></label>
+          <div>
+            <input id="title" name="title" type="text" value="{{post.title}}" class="form-control input-md" required>
+
+          </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group col-md-6">
+          <label for="category"></label>
+          <div>
+            <input id="category" name="category" type="text" value="{{post.category}}" class="form-control input-md">
+
+          </div>
+        </div>
+
+        <!-- Textarea -->
+        <div class="form-group col-md-12">
+          <label for="content"></label>
+          <div>
+            <textarea class="form-control" id="content" name="content">{{post.content}}</textarea>
+          </div>
+        </div>
+
+        <!-- Button -->
+        <div class="form-group col-md-6">
+          <label for="submit"></label>
+          <div>
+            <button id="submit" class="btn btn-info">Save</button>
+          </div>
+        </div>
+
+      </fieldset>
+    </form>
+  </div>
+</div>

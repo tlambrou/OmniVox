@@ -1,0 +1,73 @@
+<div class="col-md-12">
+  <div class="tuyin first">
+
+
+    <span class="title">Posts</span>
+
+    <form action='posts-index' id='post-form'>
+      <fieldset>
+
+
+        <!-- Text input-->
+        <div class="form-group col-md-6">
+          <label for="title"></label>
+          <div>
+            <input id="title" name="title" type="text" placeholder="Title" class="form-control input-md" required="">
+
+          </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group col-md-6">
+          <label for="category"></label>
+          <div>
+            <input id="category" name="category" type="text" placeholder="Category" class="form-control input-md">
+
+          </div>
+        </div>
+
+        <!-- Textarea -->
+        <div class="form-group col-md-12">
+          <label for="content"></label>
+          <div>
+            <textarea class="form-control" id="content" name="content" placeholder="Post Content"></textarea>
+          </div>
+        </div>
+
+        <!-- Button -->
+        <div class="form-group col-md-6">
+          <label for="submit"></label>
+          <div>
+            <button id="submit" class="btn btn-info">Submit</button>
+          </div>
+        </div>
+
+      </fieldset>
+    </form>
+
+    <div id="posts">
+      {{#each posts}}
+      <div class="post-item">
+        <div class="plan-name"><a href="/post/{{this._id}}">{{this.title}}</a></div>
+        <div class="edit-post pull-right" data-id="{{this._id}}">
+          <button type="button" action="/post/edit/{{this._id}}" class="btn btn-default">Edit <span class="glyphicon glyphicon-edit"></span> </button>
+        </div>
+        <div class="remove-post pull-right" data-id="{{this._id}}">
+          <button type="button" class="btn btn-default">Remove <span class="glyphicon glyphicon-minus"></span> </button>
+        </div>
+        <div class="text"><p><span class="label label-default">{{this.category}}</span></p></div>
+
+      </div>
+      {{/each}}
+    </div>
+
+    <div class="box">
+      <button id="show" name="show" class="btn btn-warning show">I'm Here!</button>
+      <button id="hide" name="hide" class="btn btn-danger pull-right hide">Now I'm over here!</button>
+    </div>
+    <br />
+    <div class="box">
+      <button id="success" name="success" class="btn btn-success">Success</button>
+    </div>
+  </div>
+</div>

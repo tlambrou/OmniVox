@@ -1,0 +1,89 @@
+<div class="col-md-12">
+  <div class="tuyin first">
+    <div id="posts">
+      <span class="title">{{post.title}}</span>
+      <div class="plan-name">{{post.category}}</div>
+      <div class="edit-post pull-right" data-id="{{post._id}}">
+        <button type="button" action="/post/edit/{{post._id}}" class="btn btn-default">Edit <span class="glyphicon glyphicon-edit"></span> </button>
+      </div>
+      <div class="text"><p>{{post.content}}</p></div>
+
+
+
+
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <h3>Comments</h3>
+
+            <form id='comment-form'>
+              <fieldset>
+
+
+                <!-- Textarea -->
+                <div class="form-group col-sm-8">
+                  <label for="content"></label>
+                  <div>
+                    <textarea class="form-control" id="content" name="content" for="content" placeholder="Post a Comment"></textarea>
+                  </div>
+                </div>
+
+                <!-- Button -->
+                <div class="form-group col-md-6">
+                  <label for="submit"></label>
+                  <div>
+                    <button id="submit" class="btn btn-info">Submit</button>
+                  </div>
+                </div>
+
+              </fieldset>
+            </form>
+
+          </div><!-- /col-sm-12 -->
+        </div><!-- /row -->
+        <div class="row">
+          <div id="comments" class="col-sm-10">
+            {{#each post.comments}}
+              {{!-- <div class="thumbnail">
+                <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+              </div><!-- /thumbnail --> --}}
+
+              <div class="col-sm-9">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <strong>myusername</strong> <span class="text-muted">commented 5 days ago</span>
+                  </div>
+                  <div class="panel-body">
+                    {{this.content}}
+                  </div><!-- /panel-body -->
+                </div><!-- /panel panel-default -->
+              </div>
+            {{/each}}
+          </div>
+          <!-- /col-sm-5 -->
+          {{!-- <div class="col-md-2">
+
+        </div>
+        <div class="col-sm-1">
+        <div class="thumbnail">
+        <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+      </div><!-- /thumbnail -->
+    </div><!-- /col-sm-1 -->
+
+    <div class="col-sm-5">
+    <div class="panel panel-default">
+    <div class="panel-heading">
+    <strong>myusername</strong> <span class="text-muted">commented 5 days ago</span>
+  </div>
+  <div class="panel-body">
+  Panel content
+</div><!-- /panel-body -->
+</div><!-- /panel panel-default -->
+</div><!-- /col-sm-5 -->
+</div><!-- /row --> --}}
+
+</div><!-- /container -->
+
+</div>
+</div>
+</div>

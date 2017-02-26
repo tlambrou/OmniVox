@@ -1,0 +1,31 @@
+{
+  "name": "myapp",
+  "description": "My very first app with node and express!",
+  "main": "app.js",
+  "authors": [
+    "Tassos Lambrou"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "Testing",
+    "first",
+    "app",
+    "express",
+    "node",
+    "js"
+  ],
+  "homepage": "https://agile-hollows-59112.herokuapp.com/",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.1.1",
+    "js-cookie": "^2.1.3"
+  }
+}
