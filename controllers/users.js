@@ -7,12 +7,12 @@ module.exports = function(app) {
   })
 
   //USER UPDATE
-  app.put('/user', function (req, res) {
-    res.send('Got a PUT request at /user');
+  app.put('/users', function (req, res) {
+    res.send('Got a PUT request at /users');
   });
 
   //USER DELETE
-  app.delete('/user', function (req, res) {
-    res.send('Got a DELETE request at /user');
+  app.delete('/users', function (req, res) {
+    res.send('Got a DELETE request at /users');
   });
 }

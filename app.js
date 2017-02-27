@@ -8,9 +8,9 @@ var jwt = require('express-jwt');
 var cookieParser = require('cookie-parser');
 
 // DB Setup
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/myapp');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/omnivox');
 mongoose.Promise = global.Promise;
-// var Post = require('./models/post.js');
+// var Poll = require('./models/poll.js');
 var User = require('./models/user.js');
 
 var db = mongoose.connection;
@@ -45,12 +45,14 @@ app.use(bodyParser.urlencoded({
 
 //ROUTES
 //===========
-require('./controllers/auth.js')(app);
-require('./controllers/post.js')(app);
-require('./controllers/user.js')(app);
+
+
+// require('./controllers/auth.js')(app);
+require('./controllers/polls.js')(app);
+require('./controllers/users.js')(app);
 require('./controllers/custom.js')(app);
 require('./controllers/index.js')(app);
-require('./controllers/comment.js')(app);
+require('./controllers/thoughts.js')(app);
 
 // SERVER
 var port = process.env.PORT || 3000;

@@ -1,0 +1,53 @@
+<div class="col-md-12">
+  <div class="tuyin first">
+
+    <div style="text-align:center;"><span class="title text-center">Welcome to OmniVox</span></div>
+
+
+
+        <form action='polls-new' id='poll-form'>
+          <fieldset>
+
+            <div class="row">
+            <!-- Text input-->
+            <div class="form-group col-md-8" style="margin-left:auto;margin-right:auto;">
+              <label for="path"></label>
+              <div>
+                <input id="path" name="path" type="text" placeholder="Enter Your Vox Code or Enter a New Vox Custom Code" class="form-control input-md" required="">
+
+              </div>
+            </div>
+
+
+            <!-- Button -->
+            <div class="form-group col-md-4">
+              <label for="submit"></label>
+              <div>
+                <button id="submit" class="btn btn-info">Go!</button>
+              </div>
+            </div>
+          </div>
+
+          </fieldset>
+        </form>
+
+
+
+    {{!-- <div id="polls">
+    {{#each polls}}
+    <div class="poll-item">
+    <div class="plan-name"><a href="/polls/{{this._id}}">{{this.title}}</a></div>
+    <div class="edit-poll pull-right" data-id="{{this._id}}">
+    <button type="button" action="/polls/edit/{{this._id}}" class="btn btn-default">Edit <span class="glyphicon glyphicon-edit"></span> </button>
+  </div>
+  <div class="remove-poll pull-right" data-id="{{this._id}}">
+  <button type="button" class="btn btn-default">Remove <span class="glyphicon glyphicon-minus"></span> </button>
+</div>
+<div class="text"><p><span class="label label-default">{{this.category}}</span></p></div>
+
+</div>
+{{/each}}
+</div> --}}
+
+</div>
+</div>

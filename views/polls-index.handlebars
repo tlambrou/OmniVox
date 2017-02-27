@@ -2,9 +2,9 @@
   <div class="tuyin first">
 
 
-    <span class="title">Posts</span>
+    <span class="title">Polls</span>
 
-    <form action='posts-index' id='post-form'>
+    <form action='polls-index' id='poll-form'>
       <fieldset>
 
 
@@ -30,7 +30,7 @@
         <div class="form-group col-md-12">
           <label for="content"></label>
           <div>
-            <textarea class="form-control" id="content" name="content" placeholder="Post Content"></textarea>
+            <textarea class="form-control" id="content" name="content" placeholder="Poll Content"></textarea>
           </div>
         </div>
 
@@ -45,14 +45,14 @@
       </fieldset>
     </form>
 
-    <div id="posts">
-      {{#each posts}}
-      <div class="post-item">
-        <div class="plan-name"><a href="/post/{{this._id}}">{{this.title}}</a></div>
-        <div class="edit-post pull-right" data-id="{{this._id}}">
-          <button type="button" action="/post/edit/{{this._id}}" class="btn btn-default">Edit <span class="glyphicon glyphicon-edit"></span> </button>
+    <div id="polls">
+      {{#each polls}}
+      <div class="poll-item">
+        <div class="plan-name"><a href="/polls/{{this._id}}">{{this.title}}</a></div>
+        <div class="edit-poll pull-right" data-id="{{this._id}}">
+          <button type="button" action="/polls/edit/{{this._id}}" class="btn btn-default">Edit <span class="glyphicon glyphicon-edit"></span> </button>
         </div>
-        <div class="remove-post pull-right" data-id="{{this._id}}">
+        <div class="remove-poll pull-right" data-id="{{this._id}}">
           <button type="button" class="btn btn-default">Remove <span class="glyphicon glyphicon-minus"></span> </button>
         </div>
         <div class="text"><p><span class="label label-default">{{this.category}}</span></p></div>

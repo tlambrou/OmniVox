@@ -1,33 +1,33 @@
 <div class="col-md-12">
   <div class="tuyin first">
-    <span class="title">Edit Your Post</span>
+    <span class="title">Edit Your Poll</span>
 
-    <form action='post-edit' id='edit-form'>
+    <form action='poll-edit' id='edit-form'>
       <fieldset>
 
         <!-- Text input-->
         <div class="form-group col-md-6">
           <label for="title"></label>
           <div>
-            <input id="title" name="title" type="text" value="{{post.title}}" class="form-control input-md" required>
+            <input id="title" name="title" type="text" value="{{poll.title}}" class="form-control input-md" required>
 
           </div>
         </div>
 
         <!-- Text input-->
         <div class="form-group col-md-6">
-          <label for="category"></label>
+          <label for="path"></label>
           <div>
-            <input id="category" name="category" type="text" value="{{post.category}}" class="form-control input-md">
+            <input id="path" name="path" type="text" value="{{poll.path}}" class="form-control input-md">
 
           </div>
         </div>
 
         <!-- Textarea -->
         <div class="form-group col-md-12">
-          <label for="content"></label>
+          <label for="description"></label>
           <div>
-            <textarea class="form-control" id="content" name="content">{{post.content}}</textarea>
+            <textarea class="form-control" id="description" name="description">{{poll.description}}</textarea>
           </div>
         </div>
 
