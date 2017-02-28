@@ -1,3 +1,14 @@
+function makeid()
+{
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for( var i=0; i < 5; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+}
+
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema;
 
@@ -9,6 +20,7 @@ var PollSchema = new Schema({
   , description   : { type: String }
   , path          : { type: String, required: true, unique: true }
 
+  , creator       : String
   , thoughts      : [{ type: Schema.Types.ObjectId, ref: 'Thought' }]
   , users         : [{ type: Schema.Types.ObjectId, ref: 'User' }]
   , moderator     : { type: Schema.Types.ObjectId, ref: 'User' }
@@ -25,9 +37,6 @@ PollSchema.pre('save', function(next) {
     this.title = this.path
   }
 
-  // if ( !this.path ) {
-  //   this.path = this._id
-  // }
   next();
 });
 
