@@ -1,85 +1,176 @@
 <div class="col-md-12">
   <div class="tuyin first">
     <div id="polls">
+      {{#if poll.title}}
       <span class="title">{{poll.title}}</span>
-      <div class="plan-name">{{poll.path}}</div>
-      {{!-- <div class="edit-poll pull-right" data-id="{{poll._id}}">
-        <button type="button" action="/poll/edit/{{poll._id}}" class="btn btn-default">Edit <span class="glyphicon glyphicon-edit"></span> </button>
-      </div> --}}
-      <div class="text"><p>{{poll.description}}</p></div>
-
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12">
-            <h4>Poll Items</h4>
-
-            <form id='thought-form'>
-              <fieldset>
-
-                <!-- Textarea -->
-                <div class="form-group col-sm-8">
-                  <label for="description"></label>
-                  <div>
-                    <textarea class="form-control" id="description" name="description" for="description" placeholder="Add an element to your poll"></textarea>
-                  </div>
-                </div>
-
-                <!-- Button -->
-                <div class="form-group col-md-6">
-                  <label for="submit"></label>
-                  <div>
-                    <button id="submit" class="btn btn-info">Submit</button>
-                  </div>
-                </div>
-
-              </fieldset>
-            </form>
-
-          </div><!-- /col-sm-12 -->
-        </div><!-- /row -->
-        <div class="row">
-          <div id="thoughts" class="col-sm-10">
-            {{#each poll.thoughts}}
-              {{!-- <div class="thumbnail">
-                <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
-              </div><!-- /thumbnail --> --}}
-
-              <div class="col-sm-9">
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <strong>Element</strong> <span class="text-muted">Created 1 minute ago</span>
-                  </div>
-                  <div class="panel-body">
-                    {{this.description}}
-                  </div><!-- /panel-body -->
-                </div><!-- /panel panel-default -->
-              </div>
-            {{/each}}
+      {{else}}
+      <form id="title-form">
+        <fieldset>
+          <div class="input-group">
+            <input type="text" name="title" for="title" placeholder="Please Give This Poll a Title" class="form-control" >
+            <div class="input-group-btn">
+              <button type="submit" class="btn btn-info">Save</button>
+            </div>
           </div>
-          <!-- /col-sm-5 -->
-          {{!-- <div class="col-md-2">
-
+        </fieldset>
+      </form>
+      {{/if}}
+      <div id="path-ref" class="plan-name">path: <a href="/{{poll.path}}">http://omnivox.io/{{poll.path}}</a></div>
+      {{!-- <div class="edit-poll pull-right" data-id="{{poll._id}}">
+      <button type="button" action="/poll/edit/{{poll._id}}" class="btn btn-default">Edit <span class="glyphicon glyphicon-edit"></span> </button>
+    </div> --}}
+    {{#if poll.description}}
+    <div class="text"><strong>Description:  </strong>{{poll.description}}</p></div>
+    {{else}}
+    <form id="desc-form">
+      <fieldset>
+        <div class="input-group">
+          <input type="text" name="description" for="description" placeholder="Describe what your poll is about here..." class="form-control" >
+          <div class="input-group-btn">
+            <button type="submit" class="btn btn-info">Save</button>
+          </div>
         </div>
-        <div class="col-sm-1">
-        <div class="thumbnail">
-        <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
-      </div><!-- /thumbnail -->
-    </div><!-- /col-sm-1 -->
+      </fieldset>
+    </form>
+    {{/if}}
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <h4>Poll Items</h4>
+          {{!-- <div class="clock"></div>
 
-    <div class="col-sm-5">
-    <div class="panel panel-default">
-    <div class="panel-heading">
-    <strong>myusername</strong> <span class="text-muted">commented 5 days ago</span>
-  </div>
-  <div class="panel-body">
-  Panel content
+          <script type="text/javascript">
+          var clock = $('.your-clock').FlipClock(3000, {
+          countdown: true,
+          clockFace: 'MinuteCounter'
+        });
+      </script> --}}
+
+      <form id='thought-form'>
+        <fieldset>
+
+          <!-- Textarea -->
+          <div class="form-group col-sm-8">
+            <label for="description"></label>
+            <div>
+              <textarea class="form-control" id="description" name="description" for="description" placeholder="Add an element to your poll"></textarea>
+            </div>
+          </div>
+
+          <!-- Button -->
+          <div class="form-group col-md-6">
+            <label for="submit"></label>
+            <div>
+              <button id="submit" class="btn btn-info">Submit</button>
+            </div>
+          </div>
+
+        </fieldset>
+      </form>
+
+    </div><!-- /col-sm-12 -->
+  </div><!-- /row -->
+
+  <div class="container">
+    <div class="row">
+
+      <section class="content">
+        <div class="col-md-9">
+          {{!-- <div class="panel panel-default"> --}}
+          <div class="panel-body">
+            {{!-- <div class="pull-right">
+            <div class="btn-group">
+            <button type="button" class="btn btn-success btn-filter" data-target="pagado">Pagado</button>
+            <button type="button" class="btn btn-warning btn-filter" data-target="pendiente">Pendiente</button>
+            <button type="button" class="btn btn-danger btn-filter" data-target="cancelado">Cancelado</button>
+            <button type="button" class="btn btn-default btn-filter" data-target="all">Todos</button>
+          </div>
+        </div> --}}
+
+        {{!-- <div class="table-responsive">
+        <table class="table">
+        {{#each poll.thoughts}}
+        <tr id="thought-row">
+        <th scope="row" id="thought-num">{{@key}}</th>
+        <td id="thought-desc">{{this.description}}</td>
+        <td id="thought-mod">{{this.updatedAt}}
+      </tr>
+      {{/each}}
+    </table>
+  </div> --}}
+
+  <div class="table-container">
+    <table class="table table-filter">
+      <tbody>
+        {{#each poll.thoughts}}
+        <tr data-status="pagado">
+          <td>
+            <div class="ckbox">
+              <input type="checkbox" id="checkbox">
+              <label for="checkbox1"></label>
+            </div>
+          </td>
+          <td>
+            <a href="javascript:;" class="star">
+              <i class="glyphicon glyphicon-star"></i>
+            </a>
+          </td>
+          <td>
+            <div class="media">
+              {{!-- <a href="#" class="pull-left">
+              <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
+            </a> --}}
+            <div class="media-body">
+              <span  data-livestamp="{{poll.updatedAtTime}}"></span>
+              {{!-- <h4 class="title">
+              Lorem Impsum
+              <span class="pull-right pagado">(Pagado)</span>
+            </h4> --}}
+            <p class="summary">{{this.description}}</p>
+          </div>
+        </div>
+      </td>
+    </tr>
+    {{/each}}
+
+  </tbody>
+</table>
+</div>
+</div>
+{{!-- </div> --}}
+{{!-- <div class="content-footer">
+<p>
+Page © - 2016 <br>
+Powered By <a href="https://www.facebook.com/tavo.qiqe.lucero" target="_blank">TavoQiqe</a>
+</p>
+</div> --}}
+</div>
+
+
+<!-- /col-sm-5 -->
+{{!-- <div class="col-md-2">
+
+</div>
+<div class="col-sm-1">
+<div class="thumbnail">
+<img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+</div><!-- /thumbnail -->
+</div><!-- /col-sm-1 -->
+
+<div class="col-sm-5">
+<div class="panel panel-default">
+<div class="panel-heading">
+<strong>myusername</strong> <span class="text-muted">commented 5 days ago</span>
+</div>
+<div class="panel-body">
+Panel content
 </div><!-- /panel-body -->
 </div><!-- /panel panel-default -->
 </div><!-- /col-sm-5 -->
 </div><!-- /row --> --}}
 
-</div><!-- /container -->
+{{!-- </div><!-- /container -->
 
 </div>
 </div>
-</div>
+</div> --}}

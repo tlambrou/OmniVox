@@ -5,7 +5,20 @@ var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var jwt = require('express-jwt');
+var cookie = require('cookie');
 var cookieParser = require('cookie-parser');
+var slugify = require('slugify')
+var moment = require('moment');
+// var hbs = exphbs.create({
+//     // Specify helpers which are only registered on this instance.
+//     helpers: {
+//         foo: function () { return 'FOO!'; },
+//         bar: function () { return 'BAR!'; },
+//         fromNow: function (){
+//
+//         };
+//     }
+// });
 
 // DB Setup
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/omnivox');
@@ -23,40 +36,14 @@ db.once('open', function() {
 app.use(express.static('public'));
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
-
+app.use(cookieParser('FBIdata'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-// Creating a random hash for cookie
-function makeid()
-{
-    var text = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    for( var i=0; i < 5; i++ )
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-    return text;
-}
-
-// app.use(cookieParser());
-//
-// app.use(jwt({
-//   secret: 'shhhhhhared-secret',
-//   getToken: function fromHeaderOrCookie (req) { //fromHeaderOrQuerystring
-//     if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
-//       return req.headers.authorization.split(' ')[1];
-//     } else if (req.cookies && req.cookies.token) {
-//       return req.cookies.token;
-//     }
-//     return null;
-//   }
-// }).unless({path: ['/', '/login', '/signup']}));
-
 //ROUTES
 //===========
-
-
 // require('./controllers/auth.js')(app);
 require('./controllers/polls.js')(app);
 require('./controllers/users.js')(app);

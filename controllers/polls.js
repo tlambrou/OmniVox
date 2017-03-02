@@ -1,8 +1,24 @@
+function makeid()
+{
+  var text = "";
+  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  for( var i=0; i < 5; i++ )
+  text += possible.charAt(Math.floor(Math.random() * possible.length));
+  return text;
+}
+
+function checkAvailability(arr, val) {
+  return arr.some(function(arrVal) {
+    return val === arrVal;
+  });
+}
+
 module.exports = function(app) {
 
   var mongoose = require('mongoose');
   var Poll = require('../models/poll.js');
   var Thought = require('../models/thought.js');
+  var slugify = require('slugify')
 
 
   //POLL NEW
@@ -15,22 +31,51 @@ module.exports = function(app) {
     // Create an object out of the id
     var pollPath = { path : req.params.pollPath }
 
+    // Retrieve any existing cookie
+    var cookie = req.signedCookies['user'];
+    // Check if cookie exists and create one if not
+    if ( !cookie ) {
+      value = makeid();
+      res.cookie('user', value, {signed: true})
+      cookie = req.signedCookies['user'];
+    }
+
     // Look for a the object by the path given
     var poll = Poll.findOne(pollPath).populate('thoughts').exec(function(err, poll) {
       if (err) {
-        console.log(err)
+        console.log(err);
       }
       else {
         if ( !poll ) {
           var newPoll = new Poll(pollPath)
+          // newPoll.creator = cookie;
+          newPoll.participants.push(cookie);
+          newPoll.path = pollPath.path;
           newPoll.save(function (err) {
             console.log(newPoll);
-            res.render('poll-show'), {poll: newPoll};
+            if (err) {console.log(err)}
+            else {
+
+              res.render('poll-show'), {poll: newPoll};
+            }
           });
 
         } else {
-          res.render('poll-show', {poll: poll});
-        };
+          if (!poll.creator){
+            poll.creator = cookie;
+          }
+
+          var contained = checkAvailability(poll.participants, cookie);
+          if (contained === false) {
+            poll.participants.push(cookie)
+          }
+          poll.save(function (err) {
+            if (err) { console.log(err)}
+            else {
+              res.render('poll-show', {poll: poll});
+            }
+          });
+        }
       };
     });
   });
@@ -76,17 +121,13 @@ module.exports = function(app) {
   });
 
   //POLL UPDATE
-  app.put('/polls/:id', function(req, res) {
-    Poll.findById(req.params.id).exec(function(err, poll) {
-      if (err) { return res.send(err) }
-      poll.title = req.body.title;
-      poll.path = req.body.path;
-      poll.description = req.body.description;
+  app.put('/:pollId', function(req, res) {
+    console.log('new title:' + req.body.title);
+    Poll.findOneAndUpdate({ path: req.params.pollId }, req.body).exec(function(err, poll) {
+      if (err) { return res.send(err) };
+      console.log('success!---------' + poll.title)
+      res.send(poll);
 
-      poll.save(function(err, poll) {
-        if (err) { return res.send(err) }
-        res.send(poll)
-      })
-    })
-  })
-}
+    });
+  });
+};

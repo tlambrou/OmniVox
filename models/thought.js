@@ -1,14 +1,15 @@
 function makeid()
 {
-    var text = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    for( var i=0; i < 5; i++ )
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-    return text;
+  var text = "";
+  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  for( var i=0; i < 5; i++ )
+  text += possible.charAt(Math.floor(Math.random() * possible.length));
+  return text;
 }
 
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema;
+var slugify = require('slugify')
 
 var ThoughtSchema = new Schema({
     createdAt     : { type: Date }
@@ -29,7 +30,13 @@ ThoughtSchema.pre('save', function(next) {
   if ( !this.createdAt ) {
     this.createdAt = now;
   }
-  if (  )
+
+  // var cookie = Cookies.get('user');
+  //
+  // if ( !cookie ) {
+  //   value = makeid();
+  //   Cookies.set('user', value, { expires: 3, path: '' });
+  // }
   next();
 });
 

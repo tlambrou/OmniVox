@@ -28,6 +28,7 @@
     "tests"
   ],
   "dependencies": {
-    "npm": "^4.2.0"
+    "npm": "^4.2.0",
+    "livestamp": "^1.1.2"
   }
 }
