@@ -1,5 +1,5 @@
 {
-  "name": "OmniVox",
+  "name": "omnivox",
   "version": "1.0.0",
   "description": "My very first app with node and express!",
   "main": "app.js",

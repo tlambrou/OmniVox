@@ -1,5 +1,5 @@
 {
-  "name": "OmniVox",
+  "name": "omnivox",
   "description": "Ultra fast group polling app built in mongo, express, node",
   "main": "app.js",
   "authors": [

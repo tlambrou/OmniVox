@@ -107,6 +107,7 @@ $(document).ready(function() {
           console.log("status")
           // $('#thoughts').prepend('<div class="plan-name"><p>' + data.description + '</p></div>');
           $( "#thought-form" )[0].reset();
+          // <tr data-status="pagado"> <td> <div class="ckbox"> <input type="checkbox" id="checkbox"> <label for="checkbox1"></label> </div></td><td> <a href="javascript:;" class="star"> <i class="glyphicon glyphicon-star"></i> </a> </td><td> <div class="media"><div class="media-body"> <span data-livestamp="{{poll.updatedAtTime}}"></span><p class="summary">{{this.description}}</p></div></div></td></tr>
         },
         error: function (response) { // 300-500
           console.log(response);
