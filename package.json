@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "My very first app with node and express!",
   "main": "app.js",
+  "engines": {
+    "node": "6.9.5"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "bower install",
@@ -34,7 +37,6 @@
     "mongodb": "^2.2.22",
     "mongoose": "^4.8.1",
     "nodemon": "^1.11.0",
-    "node" : "^6.9.5",
     "slugify": "^1.1.0"
   },
   "devDependencies": {
