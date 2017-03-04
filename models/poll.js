@@ -72,7 +72,7 @@ PollSchema.methods.highest = function highest () {
     thought = this.thoughts[i]
     if (thought.votes) {
 
-      thought.voteWidth = (highest / thought.votes) * 100
+      thought.voteWidth = (thought.votes / highest) * 100
     } else {
       thought.voteWidth = 0
     }
