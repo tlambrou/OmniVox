@@ -109,7 +109,7 @@
     },
     "bower": {
       "version": "1.8.0",
-      "from": "bower@>=1.8.0 <2.0.0",
+      "from": "https://registry.npmjs.org/bower/-/bower-1.8.0.tgz",
       "resolved": "https://registry.npmjs.org/bower/-/bower-1.8.0.tgz"
     },
     "brace-expansion": {
@@ -323,7 +323,7 @@
     },
     "express": {
       "version": "4.15.0",
-      "from": "express@4.15.0",
+      "from": "https://registry.npmjs.org/express/-/express-4.15.0.tgz",
       "resolved": "https://registry.npmjs.org/express/-/express-4.15.0.tgz"
     },
     "express-handlebars": {
