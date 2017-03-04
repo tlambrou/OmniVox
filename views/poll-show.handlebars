@@ -7,7 +7,7 @@
       <form id="title-form">
         <fieldset>
           <div class="input-group">
-            <input type="text" name="title" for="title" placeholder="Please Give This Poll a Title" class="form-control" >
+            <input type="text" name="title" for="title" placeholder="Ask a Question for Your Poll Here" class="form-control" >
             <div class="input-group-btn">
               <button type="submit" class="btn btn-info">Save</button>
             </div>
@@ -48,95 +48,214 @@
 
       <form id='thought-form'>
         <fieldset>
-
-          <!-- Textarea -->
+          <div class="input-group form-group col-sm-8">
+            <input id="description" type="textarea" name="description" for="description" placeholder="Add a response to your poll" class="form-control" >
+            <div class="input-group-btn">
+              <button type="submit" class="btn btn-info">Save</button>
+            </div>
+          </div>
+          {{!-- <!-- Textarea -->
           <div class="form-group col-sm-8">
-            <label for="description"></label>
-            <div>
-              <textarea class="form-control" id="description" name="description" for="description" placeholder="Add an element to your poll"></textarea>
-            </div>
-          </div>
+          <label for="description"></label>
+          <div>
+          <textarea class="form-control" id="description" name="description" for="description" placeholder="Add an element to your poll"></textarea>
+        </div>
+      </div>
 
-          <!-- Button -->
-          <div class="form-group col-md-6">
-            <label for="submit"></label>
-            <div>
-              <button id="submit" class="btn btn-info">Submit</button>
-            </div>
-          </div>
-
-        </fieldset>
-      </form>
-
-    </div><!-- /col-sm-12 -->
-  </div><!-- /row -->
-
-  <div class="container">
-    <div class="row">
-
-      <section class="content">
-        <div class="col-md-9">
-          {{!-- <div class="panel panel-default"> --}}
-          <div class="panel-body">
-            {{!-- <div class="pull-right">
-            <div class="btn-group">
-            <button type="button" class="btn btn-success btn-filter" data-target="pagado">Pagado</button>
-            <button type="button" class="btn btn-warning btn-filter" data-target="pendiente">Pendiente</button>
-            <button type="button" class="btn btn-danger btn-filter" data-target="cancelado">Cancelado</button>
-            <button type="button" class="btn btn-default btn-filter" data-target="all">Todos</button>
-          </div>
-        </div> --}}
-
-        {{!-- <div class="table-responsive">
-        <table class="table">
-        {{#each poll.thoughts}}
-        <tr id="thought-row">
-        <th scope="row" id="thought-num">{{@key}}</th>
-        <td id="thought-desc">{{this.description}}</td>
-        <td id="thought-mod">{{this.updatedAt}}
-      </tr>
-      {{/each}}
-    </table>
+      <!-- Button -->
+      <div class="form-group col-md-6">
+      <label for="submit"></label>
+      <div>
+      <button id="submit" class="btn btn-info">Submit</button>
+    </div>
   </div> --}}
 
-  <div class="table-container">
-    <table class="table table-filter">
-      <tbody>
-        {{#each poll.thoughts}}
-        <tr data-status="pagado">
-          <td>
-            <div class="ckbox">
-              <input type="checkbox" id="checkbox">
-              <label for="checkbox1"></label>
-            </div>
-          </td>
-          <td>
-            <a href="javascript:;" class="star">
-              <i class="glyphicon glyphicon-star"></i>
-            </a>
-          </td>
-          <td>
-            <div class="media">
-              {{!-- <a href="#" class="pull-left">
-              <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
-            </a> --}}
-            <div class="media-body">
-              <span  data-livestamp="{{poll.updatedAtTime}}"></span>
-              {{!-- <h4 class="title">
-              Lorem Impsum
-              <span class="pull-right pagado">(Pagado)</span>
-            </h4> --}}
-            <p class="summary">{{this.description}}</p>
-          </div>
+</fieldset>
+</form>
+
+</div><!-- /col-sm-12 -->
+</div><!-- /row -->
+
+
+{{!-- Beginning of table --}}
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <div class="widget blank no-padding">
+        <div class="panel panel-default work-progress-table">
+          <!-- Default panel contents -->
+          {{!-- <div class="panel-heading"> --}}
+          {{!-- <div class="dropdown rounded">
+
+          <button class="btn btn-xs btn-danger pull-right"  data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+        </div> --}}
+        {{!-- </div> --}}
+        <!-- Table -->
+        <table id="mytable" class="table">
+          <thead>
+            <tr>
+              <th>{{!-- <input type="checkbox" id="checkall" /> --}}</th>
+              <th>Response</th>
+              <th style="width:25%">Results</th>
+              <th>Time</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="thought-tbody">
+            {{#each poll.thoughts}}
+            <tr>
+              {{!-- <td><input type="checkbox" class="checkthis" /></td> --}}
+              <td>
+                {{#if this.userContained}}
+                <div id="vote-buttons" class="" data-toggle="buttons">
+                  <label id="unvote" class="btn btn-sm btn-success">
+                    <input type="radio" name="{{this._id}}" id="unvote-button" autocomplete="off">
+                    <i class="fa fa-check"></i> Voted
+                  </label>
+                  <label id="vote" class="btn btn-sm btn-default active">
+                    <input type="radio" name="{{this._id}}" id="vote-button" autocomplete="off" checked>
+                    <i class="fa fa-warning"></i> Vote
+                  </label>
+                </div>
+                {{else}}
+                <div id="vote-buttons" class="" data-toggle="buttons">
+                  <label id="unvote" class="btn btn-sm btn-success active">
+                    <input type="radio" name="{{this._id}}" id="unvote-button" autocomplete="off" checked>
+                    <i class="fa fa-check"></i> Voted
+                  </label>
+                  <label id="vote" class="btn btn-sm btn-default">
+                    <input type="radio" name="{{this._id}}" id="vote-button" autocomplete="off">
+                    <i class="fa fa-warning"></i> Vote
+                  </label>
+                </div>
+                {{/if}}
+              </td>
+              <td>{{this.description}}</td>
+              <td>
+                <div class="progress">
+                  <div style="width: {{this.voteWidth}}%;" aria-valuemax="{{poll.highestVote}}" aria-valuemin="0" aria-valuenow="{{this.votes}}" role="progressbar" class="blue progress-bar">
+                    <span>{{this.votes}}</span>
+                  </div>
+                </div>
+              </td>
+              <td><span class="label label-info">Recent</span></td>
+              <td>
+                <div class="remove-thought" data-id="{{this._id}}">
+                  <button type="button" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-trash"></span> </button>
+                </div>
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+        <h4 class="modal-title custom_align" id="Heading">Delete this entry</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this response?</div>
+
+      </div>
+      <div class="modal-footer ">
+        <button type="button" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+{{!-- End of table --}}
+
+
+<div class="container">
+  <div class="row">
+
+    <section class="content">
+      <div class="col-md-9">
+        {{!-- <div class="panel panel-default"> --}}
+        <div class="panel-body">
+          {{!-- <div class="pull-right">
+          <div class="btn-group">
+          <button type="button" class="btn btn-success btn-filter" data-target="pagado">Pagado</button>
+          <button type="button" class="btn btn-warning btn-filter" data-target="pendiente">Pendiente</button>
+          <button type="button" class="btn btn-danger btn-filter" data-target="cancelado">Cancelado</button>
+          <button type="button" class="btn btn-default btn-filter" data-target="all">Todos</button>
         </div>
-      </td>
+      </div> --}}
+
+      {{!-- <div class="table-responsive">
+      <table class="table">
+      {{#each poll.thoughts}}
+      <tr id="thought-row">
+      <th scope="row" id="thought-num">{{@key}}</th>
+      <td id="thought-desc">{{this.description}}</td>
+      <td id="thought-mod">{{this.updatedAt}}
     </tr>
     {{/each}}
+  </table>
+</div> --}}
 
-  </tbody>
+{{!-- <div class="table-container">
+<table class="table table-filter">
+<tbody> --}}
+{{!-- {{#each poll.thoughts}} --}}
+{{!-- <tr data-status="pagado">
+<td>
+<div class="" data-toggle="buttons">
+<label class="btn btn-sm btn-success active">
+<input type="radio" name="options" id="option1" autocomplete="off" checked>
+<i class="fa fa-check"></i> Voted
+</label>
+<label class="btn btn-sm btn-default">
+<input type="radio" name="options" id="option2" autocomplete="off">
+<i class="fa fa-warning"></i> Vote
+</label>
+</div> --}}
+
+{{!-- <div class="ckbox">
+<input type="checkbox" id="checkbox">
+<label for="checkbox1"></label>
+</div> --}}
+
+{{!-- </td>
+<td>
+<a href="javascript:;" class="star">
+<i class="glyphicon glyphicon-star"></i>
+</a>
+</td>
+<td>
+<div class="media"> --}}
+{{!-- <a href="#" class="pull-left">
+<img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
+</a> --}}
+{{!-- <div class="media-body">
+<span data-livestamp="{{this.updatedAtTime}}"></span> --}}
+{{!-- <h4 class="title">
+Lorem Impsum
+<span class="pull-right pagado">(Pagado)</span>
+</h4> --}}
+{{!-- <p class="summary">{{this.description}}</p>
+</div>
+</div>
+</td>
+</tr>
+{{/each}}
+
+</tbody>
 </table>
 </div>
-</div>
+</div> --}}
 {{!-- </div> --}}
 {{!-- <div class="content-footer">
 <p>

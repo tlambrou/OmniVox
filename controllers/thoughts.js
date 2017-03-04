@@ -7,6 +7,12 @@ function makeid()
   return text;
 }
 
+function checkAvailability(arr, val) {
+  return arr.some(function(arrVal) {
+    return val === arrVal;
+  });
+}
+
 module.exports = function(app) {
 
   var mongoose = require('mongoose');
@@ -38,6 +44,51 @@ module.exports = function(app) {
             res.status(200).json(thought);
           });
         })
+      });
+    });
+
+    // THOUGHT UPDATE
+    app.put('/polls/:pollId/thoughts/:thoughtId', function (req, res) {
+      thoughtId = req.params.thoughtId
+      pollId = req.params.pollId
+      Thought.findById(thoughtId).exec(function (err, thought) {
+        var cookie = req.signedCookies['user']
+        var contained = checkAvailability(thought.voters, cookie);
+        if (contained === false) {
+          thought.voters.push(cookie)
+          // Poll.findById(pollId).exec(function (err, poll) {
+          //   if (err) {console.log(err)}
+          //   else {
+          //     Poll.highest(poll.thoughts)
+          //     res.render('poll-show', {poll: poll});
+          //   }
+          // })
+        } else if (contained === true) {
+          thought.voters.pop(cookie)
+        }
+
+        thought.save(function (err) {
+          if (err) { console.log(err)}
+          else {
+            // res.send()
+            // res.render('poll-show', {data: thought});
+            res.status(200).json({thought});
+          }
+        });
+
+
+      });
+    });
+
+
+
+
+    // THOUGHT DELETE
+    app.delete('/thoughts/:id', function (req, res) {
+      Thought.findById(req.params.id).exec(function (err, thought) {
+        thought.remove();
+
+        res.status(200).json({});
       });
     });
 

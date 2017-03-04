@@ -69,9 +69,20 @@ module.exports = function(app) {
           if (contained === false) {
             poll.participants.push(cookie)
           }
+
+
+          var thoughts = poll.thoughts
+          if (thoughts) {
+            for (var i = 0; i < thoughts.length; i++) {
+              thought = thoughts[i]
+              thought.setUserContained(cookie)
+            }
+          }
+
           poll.save(function (err) {
             if (err) { console.log(err)}
             else {
+
               res.render('poll-show', {poll: poll});
             }
           });
