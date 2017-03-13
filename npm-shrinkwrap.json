@@ -97,6 +97,11 @@
       "from": "binary-extensions@>=1.0.0 <2.0.0",
       "resolved": "https://registry.npmjs.org/binary-extensions/-/binary-extensions-1.8.0.tgz"
     },
+    "block-stream": {
+      "version": "0.0.9",
+      "from": "block-stream@*",
+      "resolved": "https://registry.npmjs.org/block-stream/-/block-stream-0.0.9.tgz"
+    },
     "bluebird": {
       "version": "2.10.2",
       "from": "bluebird@2.10.2",
@@ -414,6 +419,11 @@
       "version": "0.1.3",
       "from": "from@>=0.0.0 <1.0.0",
       "resolved": "https://registry.npmjs.org/from/-/from-0.1.3.tgz"
+    },
+    "fs.realpath": {
+      "version": "1.0.0",
+      "from": "fs.realpath@>=1.0.0 <2.0.0",
+      "resolved": "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
     },
     "fsevents": {
       "version": "1.1.1",
@@ -1109,6 +1119,11 @@
         }
       }
     },
+    "fstream": {
+      "version": "1.0.11",
+      "from": "fstream@>=1.0.10 <2.0.0",
+      "resolved": "https://registry.npmjs.org/fstream/-/fstream-1.0.11.tgz"
+    },
     "function-bind": {
       "version": "1.1.0",
       "from": "function-bind@>=1.1.0 <2.0.0",
@@ -1155,6 +1170,11 @@
       "version": "1.1.0",
       "from": "grunt-known-options@>=1.1.0 <1.2.0",
       "resolved": "https://registry.npmjs.org/grunt-known-options/-/grunt-known-options-1.1.0.tgz"
+    },
+    "hammerjs": {
+      "version": "2.0.8",
+      "from": "hammerjs@>=2.0.4 <3.0.0",
+      "resolved": "https://registry.npmjs.org/hammerjs/-/hammerjs-2.0.8.tgz"
     },
     "handlebars": {
       "version": "4.0.6",
@@ -1447,6 +1467,18 @@
       "from": "map-stream@>=0.1.0 <0.2.0",
       "resolved": "https://registry.npmjs.org/map-stream/-/map-stream-0.1.0.tgz"
     },
+    "materialize-css": {
+      "version": "0.98.0",
+      "from": "materialize-css@latest",
+      "resolved": "https://registry.npmjs.org/materialize-css/-/materialize-css-0.98.0.tgz",
+      "dependencies": {
+        "jquery": {
+          "version": "2.2.4",
+          "from": "jquery@>=2.1.4 <3.0.0",
+          "resolved": "https://registry.npmjs.org/jquery/-/jquery-2.2.4.tgz"
+        }
+      }
+    },
     "media-typer": {
       "version": "0.3.0",
       "from": "media-typer@0.3.0",
@@ -1588,6 +1620,11 @@
       "version": "1.0.2",
       "from": "nested-error-stacks@>=1.0.0 <2.0.0",
       "resolved": "https://registry.npmjs.org/nested-error-stacks/-/nested-error-stacks-1.0.2.tgz"
+    },
+    "node-archiver": {
+      "version": "0.3.0",
+      "from": "node-archiver@>=0.3.0 <0.4.0",
+      "resolved": "https://registry.npmjs.org/node-archiver/-/node-archiver-0.3.0.tgz"
     },
     "nodemon": {
       "version": "1.11.0",
@@ -1827,6 +1864,18 @@
       "resolved": "https://registry.npmjs.org/right-align/-/right-align-0.1.3.tgz",
       "optional": true
     },
+    "rimraf": {
+      "version": "2.6.1",
+      "from": "rimraf@>=2.0.0 <3.0.0",
+      "resolved": "https://registry.npmjs.org/rimraf/-/rimraf-2.6.1.tgz",
+      "dependencies": {
+        "glob": {
+          "version": "7.1.1",
+          "from": "glob@>=7.0.5 <8.0.0",
+          "resolved": "https://registry.npmjs.org/glob/-/glob-7.1.1.tgz"
+        }
+      }
+    },
     "safe-buffer": {
       "version": "5.0.1",
       "from": "safe-buffer@>=5.0.1 <6.0.0",
@@ -1926,6 +1975,11 @@
       "version": "2.0.0",
       "from": "supports-color@>=2.0.0 <3.0.0",
       "resolved": "https://registry.npmjs.org/supports-color/-/supports-color-2.0.0.tgz"
+    },
+    "tar": {
+      "version": "2.2.1",
+      "from": "tar@>=2.2.1 <3.0.0",
+      "resolved": "https://registry.npmjs.org/tar/-/tar-2.2.1.tgz"
     },
     "through": {
       "version": "2.3.8",
