@@ -11,6 +11,11 @@ main {
   flex: 1 0 auto;
 }
 
+.brand-logo a:hover {
+  text-decoration: none;
+  outline: none;
+}
+
 
 .form-group {
   /*position: relative;
@@ -21,6 +26,12 @@ main {
 
 .logo-text {
   font-family: 'Philosopher', sans-serif;
+  text-decoration: none
+}
+
+.nav-wrapper a:hover {
+  text-decoration: none
+
 }
 
 .show {

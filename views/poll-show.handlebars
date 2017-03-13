@@ -14,7 +14,9 @@
       </fieldset>
     </form>
     {{/if}}
-    <div id="path-ref" class="plan-name">path: <a href="/{{poll.path}}">http://omnivox.io/{{poll.path}}</a></div>
+    <h5>
+      path: <a href="/{{poll.path}}">http://omnivox.io/{{poll.path}}</a>
+    </h5>
     {{#if poll.description}}
     <p class="flow-text"><strong>Description:  </strong>{{poll.description}}</p>
     {{else}}
@@ -29,147 +31,104 @@
       </fieldset>
     </form>
     {{/if}}
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-12">
-          <h4>Poll Items</h4>
-
-          <form id='thought-form'>
-            <fieldset>
-              <div class="input-group form-group col s12">
-                <input id="description" type="textarea" name="description" for="description" placeholder="Add a response to your poll" class="form-control" >
-                <div class="input-group-btn">
-                  <button type="submit" class="btn btn-info">Save</button>
-                </div>
-              </div>
-
-
-            </fieldset>
-          </form>
-
-        </div><!-- /col-sm-12 -->
-      </div><!-- /row -->
-
-
-      {{!-- Beginning of table --}}
-      <div class="container">
-        <div class="row">
-          <div class="col s12">
-            <div class="widget blank no-padding">
-              <div class="panel panel-default work-progress-table">
-                <!-- Default panel contents -->
-                {{!-- <div class="panel-heading"> --}}
-                {{!-- <div class="dropdown rounded">
-
-                <button class="btn btn-xs btn-danger pull-right"  data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span> Delete</button>
-              </div> --}}
-              {{!-- </div> --}}
-              <!-- Table -->
-              {{#if poll.thoughts}}
-              <table id="mytable" class="table">
-                <thead>
-                  <tr>
-                    <th>{{!-- <input type="checkbox" id="checkall" /> --}}</th>
-                    <th>Response</th>
-                    <th style="width:25%">Results</th>
-                    <th>Time</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody id="thought-tbody">
-                  {{#each poll.thoughts}}
-                  <tr>
-                    {{!-- <td><input type="checkbox" class="checkthis" /></td> --}}
-                    <td>
-                      {{#if this.userContained}}
-                      <div id="vote-buttons" class="" data-toggle="buttons">
-                        <label id="unvote" class="btn btn-sm btn-success">
-                          <input type="radio" name="{{this._id}}" id="unvote-button" autocomplete="off">
-                          <i class="fa fa-check"></i> Voted
-                        </label>
-                        <label id="vote" class="btn btn-sm btn-default active">
-                          <input type="radio" name="{{this._id}}" id="vote-button" autocomplete="off" checked>
-                          <i class="fa fa-warning"></i> Vote
-                        </label>
-                      </div>
-                      {{else}}
-                      <div id="vote-buttons" class="" data-toggle="buttons">
-                        <label id="unvote" class="btn btn-sm btn-success active">
-                          <input type="radio" name="{{this._id}}" id="unvote-button" autocomplete="off" checked>
-                          <i class="fa fa-check"></i> Voted
-                        </label>
-                        <label id="vote" class="btn btn-sm btn-default">
-                          <input type="radio" name="{{this._id}}" id="vote-button" autocomplete="off">
-                          <i class="fa fa-warning"></i> Vote
-                        </label>
-                      </div>
-                      {{/if}}
-                    </td>
-                    <td>{{this.description}}</td>
-                    <td>
-                      <div class="progress">
-                        <div class="determinate" style="width: {{this.voteWidth}}%"></div>
-                      </div>
-                      <div class="progress">
-                        <div style="width: %;" aria-valuemax="{{poll.highestVote}}" aria-valuemin="0" aria-valuenow="{{this.votes}}" role="progressbar" class="blue progress-bar">
-                          <span>{{this.votes}}</span>
-                        </div>
-                      </div>
-                    </td>
-                    <td><span class="label label-info">Recent</span></td>
-                    <td>
-                      <div class="remove-thought" data-id="{{this._id}}">
-                        <button type="button" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-trash"></span> </button>
-                      </div>
-                    </td>
-                  </tr>
-                  {{/each}}
-                </tbody>
-              </table>
-              {{/if}}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-            <h4 class="modal-title custom_align" id="Heading">Delete this entry</h4>
-          </div>
-          <div class="modal-body">
-
-            <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this response?</div>
-
-          </div>
-          <div class="modal-footer ">
-            <button type="button" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
-          </div>
-        </div>
-        <!-- /.modal-content -->
-      </div>
-      <!-- /.modal-dialog -->
-    </div>
-    {{!-- End of table --}}
-
-    <div class="container">
-      <div class="row">
-
-        <section class="content">
-          <div class="col-md-9">
-            {{!-- <div class="panel panel-default"> --}}
-            <div class="panel-body">
-
-            </div>
-          </div>
-        </section>
-      </div>
-    </div>
   </div>
+  <div class="col s12">
+    <h4>Poll Items</h4>
+
+    <form id='thought-form' class="col s12">
+        <div class="input-group form-group col s12">
+          <input id="description" type="textarea" name="description" for="description" placeholder="Add a response to your poll" class="form-control" >
+          <div class="input-group-btn">
+            <button type="submit" class="btn btn-info">Add</button>
+          </div>
+        </div>
+    </form>
+
+  </div><!-- /col-sm-12 -->
+
+
+
+  {{!-- Beginning of table --}}
+  <div class="col s12">
+    <!-- Default panel contents -->
+    {{!-- <div class="panel-heading"> --}}
+    {{!-- <div class="dropdown rounded">
+
+    <button class="btn btn-xs btn-danger pull-right"  data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+  </div> --}}
+  {{!-- </div> --}}
+  <!-- Table -->
+  {{#if poll.thoughts}}
+  <table id="table" class="highlight">
+    <thead>
+      <tr>
+        <th>{{!-- <input type="checkbox" id="checkall" /> --}}</th>
+        <th>Response</th>
+        <th style="width:40%;">Results</th>
+        <th>Time</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="thought-tbody">
+      {{#each poll.thoughts}}
+      <tr>
+        {{!-- <td><input type="checkbox" class="checkthis" /></td> --}}
+        <td>
+          {{#if this.userContained}}
+          <div id="vote-buttons" class="" data-toggle="buttons">
+            <label id="unvote" class="btn btn-sm btn-success">
+              <input type="radio" name="{{this._id}}" id="unvote-button" autocomplete="off">
+              <i class="fa fa-check"></i> Voted
+            </label>
+            <label id="vote" class="btn btn-sm btn-default active">
+              <input type="radio" name="{{this._id}}" id="vote-button" autocomplete="off" checked>
+              <i class="fa fa-warning"></i> Vote
+            </label>
+          </div>
+          {{else}}
+          <div id="vote-buttons" class="" data-toggle="buttons">
+            <label id="unvote" class="btn btn-sm btn-success active">
+              <input type="radio" name="{{this._id}}" id="unvote-button" autocomplete="off" checked>
+              <i class="fa fa-check"></i> Voted
+            </label>
+            <label id="vote" class="btn btn-sm btn-default">
+              <input type="radio" name="{{this._id}}" id="vote-button" autocomplete="off">
+              <i class="fa fa-warning"></i> Vote
+            </label>
+          </div>
+          {{/if}}
+        </td>
+        <td>{{this.description}}</td>
+        <td>
+          <div class="progress">
+            <div class="determinate" style="width: {{this.voteWidth}}%">
+
+            </div>
+            <p>{{this.votes}}</p>
+          </div>
+          {{!-- <div class="progress">
+            <div style="width: %;" aria-valuemax="{{poll.highestVote}}" aria-valuemin="0" aria-valuenow="{{this.votes}}" role="progressbar" class="blue progress-bar">
+              <span>{{this.votes}}</span>
+            </div>
+          </div> --}}
+        </td>
+        <td><span class="label label-info">Recent</span></td>
+        <td>
+          <div class="remove-thought" data-id="{{this._id}}">
+            <button type="button" class="waves-effect waves-orange btn-flat"><span class="glyphicon glyphicon-trash"></span> </button>
+          </div>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  {{/if}}
+
+</div>
+
+
+{{!-- End of table --}}
+</div>
 </div>
 
 </div>
