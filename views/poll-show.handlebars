@@ -6,7 +6,7 @@
     <form id="title-form">
       <fieldset>
         <div class="input-group">
-          <input type="text" name="title" for="title" placeholder="Ask a Question for Your Poll Here" class="form-control" >
+          <input type="text" name="title" for="title" autofocus="autofocus" placeholder="Ask a Question for Your Poll Here" class="form-control" >
           <div class="input-group-btn">
             <button type="submit" class="btn btn-info">Save</button>
           </div>
@@ -14,9 +14,13 @@
       </fieldset>
     </form>
     {{/if}}
-    <h5>
-      path: <a href="/{{poll.path}}">http://omnivox.io/{{poll.path}}</a>
+
+    <h5 id="poll-path">
+      {{#if poll.path}}
+      path: <a id="path-url" href="/{{poll.path}}">http://omnivox.io/{{poll.path}}</a>
+      {{/if}}
     </h5>
+
     {{#if poll.description}}
     <p class="flow-text"><strong>Description:  </strong>{{poll.description}}</p>
     {{else}}
@@ -49,7 +53,7 @@
 
 
   {{!-- Beginning of table --}}
-  <div class="col s12">
+  <div class="col s12" id="table-start">
     <!-- Default panel contents -->
     {{!-- <div class="panel-heading"> --}}
     {{!-- <div class="dropdown rounded">

@@ -29,7 +29,7 @@ $(document).ready(function() {
     var title = $('#title-form').serializeObject();
     console.log(title)
     var pollPath = window.location.pathname.replace("/","").replace("/","")
-    $('#title-form').replaceWith('<span class="title">' + title.title +'</span>');
+    $('#title-form').replaceWith('<h2>' + title.title +'</h2>');
     $.ajax({
       method: "PUT",
       url: "/" + pollPath,
@@ -50,7 +50,7 @@ $(document).ready(function() {
     var description = $('#desc-form').serializeObject();
     console.log(description)
     var pollPath = window.location.pathname.replace("/","").replace("/","")
-    $('#desc-form').replaceWith('<div class="text"> <p><strong>Description:  </strong>' + description.description +'</p></div>');
+    $('#desc-form').replaceWith('<h5><p class="flow-text"><strong>Description:  </strong>' + description.description +'</p></h5>');
     $.ajax({
       method: "PUT",
       url: "/" + pollPath,
@@ -106,7 +106,15 @@ $(document).ready(function() {
       success: function (data, status, jqXHR) { // 200
         console.log("status")
         $( "#thought-form" )[0].reset();
-        $( "#thought-tbody" ).prepend('<tr id="thought-row" class="info"><td> <div class="" data-toggle="buttons"> <label class="btn btn-sm btn-success active"> <input type="radio" name="options" id="option1" autocomplete="off" checked> <i class="fa fa-check"></i> Voted </label> <label class="btn btn-sm btn-default"> <input type="radio" name="options" id="option2" autocomplete="off"> <i class="fa fa-warning"></i> Vote </label> </div></td><td>'+ data.description +'</td><td> <div class="progress"> <div style="width: 0%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" role="progressbar" class="blue progress-bar"> <span>0%</span> </div></div></td><td><span class="label label-info">Recent</span></td><td> <div class="remove-thought" data-id="'+ data._id +'"> <button type="button" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-trash"></span> </button> </div></td></tr>')
+        var thoughtHTML = '<tr id="thought-row" class="info"><td> <div class="" data-toggle="buttons"> <label class="btn btn-sm btn-success active"> <input type="radio" name="options" id="option1" autocomplete="off" checked> <i class="fa fa-check"></i> Voted </label> <label class="btn btn-sm btn-default"> <input type="radio" name="options" id="option2" autocomplete="off"> <i class="fa fa-warning"></i> Vote </label> </div></td><td>'+ data.description +'</td><td> <div class="progress"> <div style="width: 0%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" role="progressbar" class="blue progress-bar"> <span>0%</span> </div></div></td><td><span class="label label-info">Recent</span></td><td> <div class="remove-thought" data-id="'+ data._id +'"> <button type="button" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-trash"></span> </button> </div></td></tr>'
+
+        if($('#table').length === 0){
+          var content = '<table id="table" class="highlight"><thead><tr><th></th><th>Response</th><th style="width:40%;">Results</th><th>Votes</th><th></th></tr></thead><tbody id="thought-tbody">' + thoughtHTML + '</tbody></table>'
+          $('#table-start').after(content)
+        } else {
+          $( "#thought-tbody" ).prepend(thoughtHTML)
+        }
+
       },
       error: function (response) { // 300-500
         console.log(response);
@@ -259,60 +267,13 @@ $(document).ready(function() {
         });
       }
     })
-
-
   });
 
+  // Render the path properly
+  if($('#path-url').length === 0){
+    var path = window.location.pathname.replace("/","").replace("/","")
+    var insertPath = 'path: <a id="path-url" href="/' + path + '">http://omnivox.io/' + path + '</a>'
+    $( "#poll-path" ).replaceWith( insertPath );
+  }
 
-
-  // Sign Up form validation
-  // $('#signup-form').validate({
-  //   rules: {
-  //     password: {
-  //       required: true,
-  //       minlength: 6,
-  //       maxlength: 10,
-  //     } ,
-  //     confirm: {
-  //       equalTo: "#password",
-  //       minlength: 6,
-  //       maxlength: 10
-  //     }
-  //   },
-  //   messages:{
-  //     password: {
-  //       required:"the password is required"
-  //     }
-  //   }
-  // });
-
-  // Submitting a sign up form'
-  // $("#signup-form").submit(function(e) {
-  //   e.preventDefault();
-  //   var user = $(this).serializeObject();
-  //   console.log(user);
-  //
-  //   $.poll('/signup', user, function (data) {
-  //     console.log(data);
-  //   });
-  // });
-
-  // Buttons see-saw appearing on either side of page
-  // $('#show').click(function (e) {
-  //   e.preventDefault();
-  //   $('#show').removeClass("show").addClass("hide");
-  //   $('#hide').removeClass("hide").addClass("show");
-  // });
-  //
-  // $('#hide').click(function (e) {
-  //   e.preventDefault();
-  //   $('#hide').removeClass("show").addClass("hide");
-  //   $('#show').removeClass("hide").addClass("show");
-  // });
-  //
-  // // Toggling classes for button on and off (blue or green)
-  // $('#success').click(function(s) {
-  //   s.preventDefault();
-  //   $(this).toggleClass('btn-primary').toggleClass('btn-success');
-  // });
 });

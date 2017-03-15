@@ -55,7 +55,6 @@ module.exports = function(app) {
             console.log(newPoll);
             if (err) {console.log(err)}
             else {
-
               res.render('poll-show'), {poll: newPoll};
             }
           });
