@@ -272,7 +272,7 @@ $(document).ready(function() {
   // Render the path properly
   if($('#path-url').length === 0){
     var path = window.location.pathname.replace("/","").replace("/","")
-    var insertPath = 'path: <a id="path-url" href="/' + path + '">http://omnivox.io/' + path + '</a>'
+    var insertPath = '<h5 id="poll-path">path: <a id="path-url" href="/' + path + '">http://omnivox.io/' + path + '</a></h5>'
     $( "#poll-path" ).replaceWith( insertPath );
   }
 
