@@ -1,2 +1,2 @@
-# OmniVox
-Rapid, Personal, Group, Polling App built in Mongo/Express/Node
+# OmniVox.io | http://www.omnivox.io
+OmniVox is a rapid polling responsive web application that allows users to create quick anonymous polls for in-person groups/teams.  
