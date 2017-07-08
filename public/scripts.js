@@ -28,7 +28,7 @@ $(document).ready(function() {
     var title = $('#title-form').serializeObject();
     console.log(title)
     var pollPath = window.location.pathname.replace("/","").replace("/","")
-    $('#title-form').replaceWith('<h2>' + title.title +'</h2>');
+    $('#title-block').replaceWith('<div id="title-block"><h2 id="title-line"><span id="title-text>"' + title.title +'</span></h2></div>');
     $.ajax({
       method: "PUT",
       url: "/" + pollPath,
@@ -43,13 +43,43 @@ $(document).ready(function() {
 
   });
 
-  //On title save
+  // Edit the title in-place
+  $('#title-edit').click(function (e) {
+    event.preventDefault();
+    var title = $('#title-text').html()
+    $("#title-block").replaceWith('<div id="title-block"><form id="title-edit-form"><fieldset><div class="input-group"><input type="text" name="title" for="title" autofocus="autofocus" placeholder="Ask a Question for Your Poll Here" class="form-control"><div class="input-group-btn"><button type="submit" class="btn btn-info">Save</button></div></div></fieldset></form></div>')
+    console.log(title)
+    $('.form-control').val(title)
+  });
+
+  //On title edit save
+  $( "#title-edit-form").submit(function( event ) {
+    event.preventDefault();
+    var title = $('#title-edit-form').serializeObject();
+    console.log(title)
+    var pollPath = window.location.pathname.replace("/","").replace("/","")
+    $('#title-edit-form').replaceWith('<div id="title-block"><h2 id="title-line"><span id="title-text">' + title.title +'</span></h2></div>');
+    $.ajax({
+      method: "PATCH",
+      url: "/" + pollPath,
+      data: title,
+      success: function (data) { // 200
+        console.log(data.title);
+      },
+      error: function (response) { // 300-500
+        console.log(response);
+      }
+    });
+
+  });
+
+  //On description save
   $( "#desc-form").submit(function( event ) {
     event.preventDefault();
     var description = $('#desc-form').serializeObject();
     console.log(description)
     var pollPath = window.location.pathname.replace("/","").replace("/","")
-    $('#desc-form').replaceWith('<h5><p class="flow-text"><strong>Description:  </strong>' + description.description +'</p></h5>');
+    $('#desc-form').replace('<h5><p class="flow-text"><strong>Description:  </strong>' + description.description +'</p></h5>');
     $.ajax({
       method: "PUT",
       url: "/" + pollPath,
@@ -207,6 +237,8 @@ $(document).ready(function() {
 
   // Voted check...
   $("#thought-tbody" )
+
+
 
   // User clicks to vote!
   $("#thought-tbody #vote-buttons").each( function() {

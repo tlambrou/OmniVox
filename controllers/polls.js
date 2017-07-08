@@ -40,7 +40,7 @@ module.exports = function(app) {
       cookie = req.signedCookies['user'];
     }
 
-    // Look for a the object by the path given
+    // Look for the object by the path given
     var poll = Poll.findOne(pollPath).populate('thoughts').exec(function(err, poll) {
       if (err) {
         console.log(err);
@@ -135,6 +135,7 @@ module.exports = function(app) {
     console.log('new title:' + req.body.title);
     Poll.findOneAndUpdate({ path: req.params.pollId }, req.body).exec(function(err, poll) {
       if (err) { return res.send(err) };
+      poll.title = req.body.title;
       console.log('success!---------' + poll.title)
       res.send(poll);
 
