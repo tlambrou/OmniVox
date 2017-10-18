@@ -20,15 +20,15 @@ $.fn.serializeObject = function()
 $(document).ready(function() {
 
   var path = window.location.pathname.replace("/","").replace("/","")
-  $( "path-ref" ).replaceWith('path: <a href="/' + path + '">http://omnivox.io/' + path + '</a>');
+  $("path-ref").replaceWith('path: <a href="/' + path + '">http://omnivox.io/' + path + '</a>');
 
   //On title save
-  $( "#title-form").submit(function( event ) {
+  $("#title-form").submit(function( event ) {
     event.preventDefault();
     var title = $('#title-form').serializeObject();
     console.log(title)
     var pollPath = window.location.pathname.replace("/","").replace("/","")
-    $('#title-block').replaceWith('<div id="title-block"><h2 id="title-line"><span id="title-text>"' + title.title +'</span></h2></div>');
+    $('#title-form').replaceWith('<h2 id="title-line"><span id="title-text>"' + title.title +'</span></h2>');
     $.ajax({
       method: "PUT",
       url: "/" + pollPath,
@@ -45,22 +45,23 @@ $(document).ready(function() {
 
   // Edit the title in-place
   $('#title-edit').click(function (e) {
-    event.preventDefault();
+    event.preventDefault()
     var title = $('#title-text').html()
-    $("#title-block").replaceWith('<div id="title-block"><form id="title-edit-form"><fieldset><div class="input-group"><input type="text" name="title" for="title" autofocus="autofocus" placeholder="Ask a Question for Your Poll Here" class="form-control"><div class="input-group-btn"><button type="submit" class="btn btn-info">Save</button></div></div></fieldset></form></div>')
+    $("#title-block").replaceWith('<form id="update-title-submit"><fieldset><div class="input-group"><input type="text" name="title" for="title" autofocus="autofocus" placeholder="Ask a Question for Your Poll Here" class="form-control"><div class="input-group-btn"><button type="submit" class="btn btn-info">Save</button></div></div></fieldset></form>')
     console.log(title)
     $('.form-control').val(title)
   });
 
   //On title edit save
-  $( "#title-edit-form").submit(function( event ) {
-    event.preventDefault();
-    var title = $('#title-edit-form').serializeObject();
-    console.log(title)
+  $(document).on("click", "#update-title-submit", function( event) {
+    event.preventDefault()
+    var title = $('#update-title-submit').html()
+    console.log('Here is a title -> ' + title)
     var pollPath = window.location.pathname.replace("/","").replace("/","")
-    $('#title-edit-form').replaceWith('<div id="title-block"><h2 id="title-line"><span id="title-text">' + title.title +'</span></h2></div>');
+    console.log(pollPath)
+    $('#update-title-submit').replaceWith('<h2 id="title-line"><span id="title-text">' + title +'</span></h2>');
     $.ajax({
-      method: "PATCH",
+      method: "PUT",
       url: "/" + pollPath,
       data: title,
       success: function (data) { // 200
@@ -68,6 +69,15 @@ $(document).ready(function() {
       },
       error: function (response) { // 300-500
         console.log(response);
+      }
+    });
+
+    $.ajax({
+      url: '/echo/html/',
+      type: 'PUT',
+      data: "name=John&location=Boston",
+      success: function(data) {
+        alert('Load was performed.');
       }
     });
 
