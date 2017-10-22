@@ -23,15 +23,26 @@ module.exports = function(app) {
 
   //POLL NEW
   app.get('/', function(req, res) {
-    res.render('polls-new')
+
+    res.format({
+      html: () => {
+        res.render('polls-new')
+      },
+      json: () => {
+        res.json({
+          greeting: "Welcome to OmniVox.io",
+          slogan: "Super-simple, super-fast polling for groups.",
+          instruction: "Enter in the unique path of your poll to either join or create a new one.",
+          placeholder: "Enter a Vox Code or Enter a New One."
+        })
+      }
+    })
   })
 
   // POLL SHOW
-  app.get('/:pollPath/:format', function(req, res) {
+  app.get('/:pollPath', function(req, res) {
     // Create an object out of the id
     var pollPath = { path : req.params.pollPath }
-    const format = req.params.format
-
     // Retrieve any existing cookie
     var cookie = req.signedCookies['user'];
     // Check if cookie exists and create one if not
@@ -53,14 +64,12 @@ module.exports = function(app) {
           newPoll.participants.push(cookie);
           newPoll.path = pollPath.path;
           newPoll.save(function (err) {
-            console.log(newPoll);
             if (err) {console.log(err)}
             else {
-              if (format == 'json'){
-                res.json(newPoll)
-              } else {
-                res.render('poll-show'), {poll: newPoll};
-              }
+              res.format({
+                html: () => {res.render('poll-show'), {poll: newPoll} },
+                json: () => {res.json(newPoll)}
+              })
             }
           });
 
@@ -86,11 +95,14 @@ module.exports = function(app) {
           poll.save(function (err) {
             if (err) { console.log(err)}
             else {
-              if (format == 'json') {
-                res.json(poll)
-              } else {
-                res.render('poll-show', {poll: poll});
-              }
+              res.format({
+                html: () => {
+                  res.render('poll-show', {poll: poll});
+                },
+                json: () => {
+                  res.json(poll)
+                }
+              })
             }
           });
         }
@@ -99,29 +111,20 @@ module.exports = function(app) {
   });
 
   //POLLS INDEX
-  app.get('/polls/:format', function(req, res) {
-    const format = req.params.format
-
+  app.get('/polls', function(req, res) {
     Poll.find().sort({'_id': -1}).exec(function(err, polls) {
-      if (format == 'json') {
-        res.json(polls)
-      } else {
-        res.render('polls-index', { polls: polls});
-      }
+      res.format({
+        html: () => {
+          res.render('polls-index', { polls: polls});
+        },
+        json: () => {
+          res.json(polls)
+        }
+      })
+
     });
   });
 
-  //POLL SHOW
-  app.get('/pollId/:format', function (req, res) {
-    const format = req.params.format
-    var poll = Poll.findById(req.params.id).populate('thoughts').exec(function(err, poll){
-      if (format == 'json') {
-        res.json(poll)
-      } else {
-        res.render('poll-show', {poll: poll});
-      }
-    });
-  });
 
   //POLL CREATE
   app.post('/polls/', function (req, res) {
@@ -144,14 +147,18 @@ module.exports = function(app) {
   });
 
   //POLL EDIT
-  app.get('/polls/edit/:id/:format', function (req, res) {
+  app.get('/polls/edit/:id', function (req, res) {
     const format = req.params.format
     var poll = Poll.findById(req.params.id).exec(function(err, poll){
-      if (format == 'json') {
-        res.json(poll)
-      } else {
-        res.render('poll-edit', {poll: poll});
-      }
+      res.format({
+        html: () => {
+          res.render('poll-edit', {poll: poll});
+        },
+        json: () => {
+          res.json(poll)
+        }
+      })
+
     });
   });
 
@@ -163,7 +170,6 @@ module.exports = function(app) {
       poll.title = req.body.title;
       console.log('success!---------' + poll.title)
       res.send(poll);
-
     });
   });
 };

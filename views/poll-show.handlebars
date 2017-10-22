@@ -26,7 +26,7 @@
     {{#if poll.description}}
     <p class="flow-text"><strong>Description:  </strong>{{poll.description}}</p>
     {{else}}
-    <form id="desc-form">
+    <form action="/{{poll.path}}" id="desc-form">
       <fieldset>
         <div class="input-group">
           <input type="text" name="description" for="description" placeholder="Describe what your poll is about here..." class="form-control" >
