@@ -58,9 +58,10 @@ module.exports = function(app) {
         console.log(err);
       }
       else {
+        // If no pre-existing poll then create a new one
         if ( !poll ) {
           var newPoll = new Poll(pollPath)
-          // newPoll.creator = cookie;
+          // Add the current user's cookie to the participants attribute
           newPoll.participants.push(cookie);
           newPoll.path = pollPath.path;
           newPoll.save(function (err) {
