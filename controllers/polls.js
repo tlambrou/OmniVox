@@ -172,7 +172,6 @@ module.exports = function(app) {
       if (err) {
         return res.send(err)
       } else {
-        poll = {...poll, ...req.body};
         res.send(poll);
         // poll.save(function(err, poll) {
         //   if (err) {
