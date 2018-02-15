@@ -26,16 +26,18 @@
     {{#if poll.description}}
     <p class="flow-text"><strong>Description:  </strong>{{poll.description}}</p>
     {{else}}
-    <form action="/{{poll.path}}" id="desc-form">
-      <fieldset>
-        <div class="input-group">
-          <input type="text" name="description" for="description" placeholder="Describe what your poll is about here..." class="form-control" >
-          <div class="input-group-btn">
-            <button type="submit" class="btn btn-info">Save</button>
+    <div id="desc-form-container">
+      <form action="/{{poll.path}}" id="desc-form">
+        <fieldset>
+          <div class="input-group">
+            <input type="text" name="description" for="description" placeholder="Describe what your poll is about here..." class="form-control" >
+            <div class="input-group-btn">
+              <button type="submit" class="btn btn-info">Save</button>
+            </div>
           </div>
-        </div>
-      </fieldset>
-    </form>
+        </fieldset>
+      </form>
+    </div>
     {{/if}}
   </div>
   <div class="col s12">

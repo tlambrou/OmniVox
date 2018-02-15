@@ -84,12 +84,13 @@ $(document).ready(function() {
   });
 
   //On description save
-  $( "#desc-form").submit(function( event ) {
+  $("#desc-form").submit(function( event ) {
     event.preventDefault();
     var description = $('#desc-form').serializeObject();
     console.log(description)
-    var pollPath = window.location.pathname.replace("/","").replace("/","")
-    $('#desc-form').replace('<h5><p class="flow-text"><strong>Description:  </strong>' + description.description +'</p></h5>');
+    var pollPath = window.location.pathname.replace("/","")
+    console.log(pollPath)
+    $('#desc-form-container').replaceWith('<h5><p class="flow-text"><strong>Description:  </strong>' + description.description +'</p></h5>');
     $.ajax({
       method: "PUT",
       url: "/" + pollPath,

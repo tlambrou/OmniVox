@@ -134,7 +134,7 @@ module.exports = function(app) {
 
     poll.save(function (err) {
       console.log(poll);
-        res.send(poll);
+      res.send(poll);
     });
   });
 
@@ -165,12 +165,24 @@ module.exports = function(app) {
 
   //POLL UPDATE
   app.put('/:pollId', function(req, res) {
-    console.log('new title:' + req.body.title);
-    Poll.findOneAndUpdate({ path: req.params.pollId }, req.body).exec(function(err, poll) {
-      if (err) { return res.send(err) };
-      poll.title = req.body.title;
-      console.log('success!---------' + poll.title)
-      res.send(poll);
+    console.log('new data:' + req.body);
+    Poll.findOneAndUpdate({ path: req.params.pollId }, req.body)
+    .exec(function(err, poll) {
+      console.log("The callback poll:",poll)
+      if (err) {
+        return res.send(err)
+      } else {
+        poll = {...poll, ...req.body};
+        res.send(poll);
+        // poll.save(function(err, poll) {
+        //   if (err) {
+        //     console.log('Sorry there was an error saving... ', err)
+        //   } else {
+        //     console.log('success!---------' + poll.title)
+        //     res.send(poll);
+        //   };
+        // });
+      };
     });
   });
 };
